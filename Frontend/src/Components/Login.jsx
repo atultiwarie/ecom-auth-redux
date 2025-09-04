@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
+import Navbar from './Navbar';
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -12,6 +13,8 @@ const Login = () => {
     }
 
   return (
+    <>
+      <Navbar />
     <div className="h-screen  flex justify-center items-center p-4 ">
       <div className="w-[400px] h-[500px] border-2 rounded-3xl bg-white shadow-lg">
         <div className=" mt-4 text-center">
@@ -50,6 +53,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
