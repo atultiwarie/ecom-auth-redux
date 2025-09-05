@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
+const Users = require('../models/user')
 
-const authMiddleware =(req,res,next)=>{
+exports.authMiddleware =(req,res,next)=>{
     const token = req.cookies.token 
     if(!token) return res.status(401).json({message:'Unauthorized'})
     try {
@@ -13,4 +14,14 @@ const authMiddleware =(req,res,next)=>{
     }
 }
 
-module.exports= authMiddleware
+exports.admin= (req,res,next) => {
+    try {
+        if(req.user && req.user.role  === 'admin') return next()
+        return res.status(403).json({message:'Forbidden, Admins only'})
+        
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ message: "Internal Server Error" })
+
+    }
+}
